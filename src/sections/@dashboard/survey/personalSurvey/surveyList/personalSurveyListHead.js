@@ -19,8 +19,8 @@ const visuallyHidden = {
 
 const TABLE_HEAD = [
   { id: 'category', label: '카테고리', alignRight: false },
-  { id: 'survey', label: '질문', alignRight: false },
-  { id: 'type', label: '유형', alignRight: false },
+  { id: 'question', label: '질문', alignRight: false },
+  { id: 'level', label: '레벨', alignRight: false },
 ];
 
 export default function PersonalSurveyListHead({ order, orderBy, onRequestSort }) {

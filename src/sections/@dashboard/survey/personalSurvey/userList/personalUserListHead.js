@@ -18,7 +18,7 @@ const visuallyHidden = {
 };
 
 const TABLE_HEAD = [
-  { id: 'name', label: '이름', alignRight: false },
+  { id: 'name', label: '사용자 이름', alignRight: false },
   { id: 'type', label: '유형', alignRight: false },
   { id: 'birth', label: '생년월일', alignRight: false },
   { id: 'category', label: '카테고리', alignRight: false },

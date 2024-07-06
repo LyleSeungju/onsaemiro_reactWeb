@@ -16,7 +16,7 @@ import PersonalUserListBody from './personalUserListBody';
 
 PersonalUserList.propTypes = {
   USERLIST: PropTypes.array,
-  selectedUser: PropTypes.string,
+  selectedUser: PropTypes.number,
   setSelectedUser: PropTypes.func,
 };
 
@@ -32,14 +32,13 @@ export default function PersonalUserList({ USERLIST, selectedUser, setSelectedUs
     setOrderBy(property);
   };
 
-  const handleClick = (event, name) => {
-    if (selectedUser === name) {
+  const handleClick = (event, id) => {
+    if (selectedUser === id) {
       setSelectedUser(null); // 이미 선택된 항목을 클릭하면 선택 해제
     } else {
-      setSelectedUser(name); // 새로운 항목을 클릭하면 해당 항목 선택
+      setSelectedUser(id); // 새로운 항목을 클릭하면 해당 항목 선택
     }
   };
-
   return (
     <Card sx={{ mb: 3 }}>
       <Scrollbar>

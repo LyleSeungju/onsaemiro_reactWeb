@@ -6,7 +6,6 @@ import {
   TableRow,
   TableCell,
   Stack,
-  Avatar,
   Typography,
   Checkbox,
   Paper,
@@ -46,30 +45,31 @@ export default function PersonalUserListBody({ users, order, orderBy, filterName
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
   const isNotFound = !filteredUsers.length && !!filterName;
-
   return (
     <TableBody>
       {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-        const { id, name, type, birth, category, avatarUrl } = row;
-        const selectedUser = selected === name;
+        const { id, userName, userLevel, userBirth, categoryList } = row;
+        const selectedUser = selected === id;
+        const category = categoryList.map(item => item.name).join(',');
+
 
         return (
           <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
             <TableCell padding="checkbox">
-              <Checkbox checked={selectedUser} onChange={(event) => onClick(event, name)} />
+              <Checkbox checked={selectedUser} onChange={(event) => onClick(event, id)} />
             </TableCell>
 
             <TableCell component="th" scope="row" padding="none">
               <Stack direction="row" alignItems="center" spacing={2}>
-                <Avatar alt={name} src={avatarUrl} />
+                {/* <Avatar alt={userName} src={`${imageUrl}${index}`} /> */}
                 <Typography variant="subtitle2" noWrap>
-                  {name}
+                  {userName}
                 </Typography>
               </Stack>
             </TableCell>
 
-            <TableCell align="left">{type}</TableCell>
-            <TableCell align="left">{birth}</TableCell>
+            <TableCell align="left">{userLevel}</TableCell>
+            <TableCell align="left">{userBirth}</TableCell>
             <TableCell align="left">{category}</TableCell>
           </TableRow>
         );
@@ -108,16 +108,16 @@ export default function PersonalUserListBody({ users, order, orderBy, filterName
 PersonalUserListBody.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.number.isRequired,
-    birth: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+    userLevel: PropTypes.number.isRequired,
+    userBirth: PropTypes.string.isRequired,
+    categoryList: PropTypes.array.isRequired,
+    imageUrl: PropTypes.string,
   })).isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   filterName: PropTypes.string.isRequired,
-  selected: PropTypes.string, // 변경: 배열 대신 문자열
+  selected: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
