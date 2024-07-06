@@ -28,7 +28,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function applySortFilter(array, comparator, query, selected) {
+function applySortFilter(array, comparator, query) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -38,16 +38,11 @@ function applySortFilter(array, comparator, query, selected) {
   if (query) {
     return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
-  const sortedArray = stabilizedThis.map((el) => el[0]);
-  const selectedItems = sortedArray.filter(item => selected.includes(item.name));
-  const unselectedItems = sortedArray.filter(item => !selected.includes(item.name));
-  return [...selectedItems, ...unselectedItems];
+  return stabilizedThis.map((el) => el[0]);
 }
 
-
-
 export default function PersonalUserListBody({ users, order, orderBy, filterName, selected, onClick, page, rowsPerPage }) {
-  const filteredUsers = applySortFilter(users, getComparator(order, orderBy), filterName, selected);
+  const filteredUsers = applySortFilter(users, getComparator(order, orderBy), filterName);
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
   const isNotFound = !filteredUsers.length && !!filterName;
@@ -56,7 +51,7 @@ export default function PersonalUserListBody({ users, order, orderBy, filterName
     <TableBody>
       {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
         const { id, name, type, birth, category, avatarUrl } = row;
-        const selectedUser = selected.indexOf(name) !== -1;
+        const selectedUser = selected === name;
 
         return (
           <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>
@@ -109,10 +104,12 @@ export default function PersonalUserListBody({ users, order, orderBy, filterName
     </TableBody>
   );
 }
+
 PersonalUserListBody.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired,
     birth: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     avatarUrl: PropTypes.string.isRequired,
@@ -120,7 +117,7 @@ PersonalUserListBody.propTypes = {
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   filterName: PropTypes.string.isRequired,
-  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.string, // 변경: 배열 대신 문자열
   onClick: PropTypes.func.isRequired,
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,

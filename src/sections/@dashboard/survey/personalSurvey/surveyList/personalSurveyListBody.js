@@ -40,22 +40,6 @@ function applySortFilter(array, comparator, query) {
 }
 
 
-PersonalSurveyListBody.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    birth: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-  })).isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  filterName: PropTypes.string.isRequired,
-  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onClick: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-};
 
 export default function PersonalSurveyListBody({ users, order, orderBy, filterName, selected, onClick, page, rowsPerPage }) {
   const filteredUsers = applySortFilter(users, getComparator(order, orderBy), filterName);
@@ -112,3 +96,19 @@ export default function PersonalSurveyListBody({ users, order, orderBy, filterNa
     </TableBody>
   );
 }
+PersonalSurveyListBody.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    birth: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  })).isRequired,
+  order: PropTypes.string.isRequired,
+  orderBy: PropTypes.string.isRequired,
+  filterName: PropTypes.string.isRequired,
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClick: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};

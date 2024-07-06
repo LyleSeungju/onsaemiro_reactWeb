@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 // @mui
 import {
@@ -13,53 +14,16 @@ import PersonalUserListBody from './personalUserListBody';
 
 // ----------------------------------------------------------------------
 
-const USERLIST = [
-  {
-    id: 1,
-    name: 'Alice Johnson',
-    type: 0,
-    birth: '1990-01-01',
-    category: 'Admin',
-    avatarUrl: '/static/mock-images/avatars/avatar_1.jpg',
-  },
-  {
-    id: 2,
-    name: 'Bob Smith',
-    type: 0,
-    birth: '1985-05-12',
-    category: 'User',
-    avatarUrl: '/static/mock-images/avatars/avatar_2.jpg',
-  },
-  {
-    id: 3,
-    name: 'Charlie Brown',
-    type: 0,
-    birth: '1979-09-30',
-    category: 'User',
-    avatarUrl: '/static/mock-images/avatars/avatar_3.jpg',
-  },
-  {
-    id: 4,
-    name: 'David Wilson',
-    type: 0,
-    birth: '1988-07-20',
-    category: 'User',
-    avatarUrl: '/static/mock-images/avatars/avatar_4.jpg',
-  },
-  {
-    id: 5,
-    name: 'Eva Green',
-    type: 0,
-    birth: '1992-03-15',
-    category: 'User',
-    avatarUrl: '/static/mock-images/avatars/avatar_5.jpg',
-  },
-];
+PersonalUserList.propTypes = {
+  USERLIST: PropTypes.array,
+  selectedUser: PropTypes.string,
+  setSelectedUser: PropTypes.func,
+};
 
 // 메인 함수
-export default function PersonalUserList() {
+export default function PersonalUserList({ USERLIST, selectedUser, setSelectedUser }) {
   const [order, setOrder] = useState('asc');
-  const [selected, setSelected] = useState([]);
+  // const [selected, setSelectedUser] = useState(null); // 변경: 배열 대신 단일 값으로 초기화
   const [orderBy, setOrderBy] = useState('name');
 
   const handleRequestSort = (event, property) => {
@@ -69,18 +33,11 @@ export default function PersonalUserList() {
   };
 
   const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    if (selectedUser === name) {
+      setSelectedUser(null); // 이미 선택된 항목을 클릭하면 선택 해제
+    } else {
+      setSelectedUser(name); // 새로운 항목을 클릭하면 해당 항목 선택
     }
-    setSelected(newSelected);
   };
 
   return (
@@ -97,7 +54,7 @@ export default function PersonalUserList() {
               users={USERLIST}
               order={order}
               orderBy={orderBy}
-              selected={selected}
+              selected={selectedUser}
               onClick={handleClick}
               page={0}
               rowsPerPage={USERLIST.length}
