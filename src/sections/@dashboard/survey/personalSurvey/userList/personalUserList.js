@@ -23,7 +23,6 @@ PersonalUserList.propTypes = {
 // 메인 함수
 export default function PersonalUserList({ USERLIST, selectedUser, setSelectedUser }) {
   const [order, setOrder] = useState('asc');
-  // const [selected, setSelectedUser] = useState(null); // 변경: 배열 대신 단일 값으로 초기화
   const [orderBy, setOrderBy] = useState('name');
 
   const handleRequestSort = (event, property) => {

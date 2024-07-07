@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { filter } from 'lodash';
+
+// components
 import {
   TableBody,
   TableRow,
