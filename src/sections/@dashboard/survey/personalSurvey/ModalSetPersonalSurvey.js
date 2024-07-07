@@ -21,7 +21,7 @@ import PersonalSurveyList from './surveyList/personalSurveyList';
 
 const modalBoxStyle = {
   width: '80%',
-  height: '90%',
+  height: '95%',
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -29,20 +29,18 @@ const modalBoxStyle = {
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  
   display: 'flex',
   flexDirection: 'column',
 }
 
 const modalMenuBar = {
-  p: 1,
-  pl: 2, pr: 2, 
+  p: 2,
   width: '100%', 
   height: '80px',
   borderTop: '1px solid lightgray', 
   fontWeight: 'bold',
-  display: 'flex', 
   alignItems: 'center', 
+  float:'right',
   justifyContent: 'space-between' 
 };
 

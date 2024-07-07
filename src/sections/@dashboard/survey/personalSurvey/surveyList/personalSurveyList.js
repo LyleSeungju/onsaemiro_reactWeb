@@ -50,7 +50,7 @@ export default function PersonalSurveyList({ SURVEYLIST, CATEGORY, selectedSurve
   return (
     <Card sx={{ mb: 3 }}>
       <Scrollbar>
-        <TableContainer >
+        <TableContainer sx={{maxHeight:'270px'}}>
           <Table>
             <PersonalSurveyListHead
               order={order}
