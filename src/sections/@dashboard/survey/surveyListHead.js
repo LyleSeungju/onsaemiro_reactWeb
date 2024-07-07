@@ -8,7 +8,7 @@ import {
 
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import CategoryIcon from '@mui/icons-material/Category';
-
+import RuleIcon from '@mui/icons-material/Rule';
 import Iconify from '../../../components/iconify';
 
 
@@ -17,12 +17,16 @@ SurveyHead.propTypes = {
   addClick: PropTypes.func,
   seqClick: PropTypes.func,
   categoryClick: PropTypes.func,
+  personalClick: PropTypes.func,
 }
 
-export default function SurveyHead({addClick, seqClick, categoryClick }){
+export default function SurveyHead({addClick, seqClick, categoryClick, personalClick }){
     return(
         <>
         <Stack direction="row" alignItems="center" justifyContent="flex-end" mb={3} mr={4} spacing={3}>
+            <Button variant="outlined" startIcon={<RuleIcon/>} onClick={personalClick} >
+              개인질문
+            </Button>
             <Button variant="outlined" startIcon={<CategoryIcon />} onClick={categoryClick}>
               카테고리
             </Button>
