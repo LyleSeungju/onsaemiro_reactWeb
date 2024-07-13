@@ -17,7 +17,6 @@ ModifyForm.propTypes = {
 };
 
 export default function ModifyForm({ userData, setUserData,  }) { 
-    console.log('categoryList', userData);
     const navigate = useNavigate();
     const [selectedOptions, setSelectedOptions] = useState(userData.categoryList.map(category => category.id));
     const [categoryList, setCategoryList] = useState([{}]); //

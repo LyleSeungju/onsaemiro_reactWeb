@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// @mui
 import {
   Card,
   Table,
+  Box,
   TableContainer,
+  Typography,
 } from '@mui/material';
-// components
-import Scrollbar from '../../../../../components/scrollbar';
-// sections
+// import Scrollbar from '../../../../../components/scrollbar';
 import PersonalSurveyListHead from './personalSurveyListHead';
 import PersonalSurveyListBody from './personalSurveyListBody';
-
-// ----------------------------------------------------------------------
 
 PersonalSurveyList.propTypes = {
   SURVEYLIST: PropTypes.array.isRequired,
   CATEGORY: PropTypes.array.isRequired,
   selectedSurvey: PropTypes.array.isRequired,
   setSelectedSurvey: PropTypes.func.isRequired,
+  status: PropTypes.bool,
 };
 
-// 메인 함수
-export default function PersonalSurveyList({ SURVEYLIST, CATEGORY, selectedSurvey, setSelectedSurvey }) {
+export default function PersonalSurveyList({ SURVEYLIST, CATEGORY, selectedSurvey, setSelectedSurvey, status }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('category');
 
@@ -49,9 +46,9 @@ export default function PersonalSurveyList({ SURVEYLIST, CATEGORY, selectedSurve
 
   return (
     <Card sx={{ mb: 3 }}>
-      <Scrollbar>
-        <TableContainer sx={{maxHeight:'270px'}}>
-          <Table>
+      { status ? 
+        (<TableContainer sx={{ maxHeight: '370px' }}>
+          <Table stickyHeader>
             <PersonalSurveyListHead
               order={order}
               orderBy={orderBy}
@@ -69,8 +66,27 @@ export default function PersonalSurveyList({ SURVEYLIST, CATEGORY, selectedSurve
               filterName=""
             />
           </Table>
-        </TableContainer>
-      </Scrollbar>
+        </TableContainer>)
+        :
+        <Box 
+      sx={{ 
+        height: '370px', 
+        width: '100%', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        textAlign: 'center'
+      }}
+    >
+      <Typography variant="h6" gutterBottom>
+        사용자를 선택해주세요
+      </Typography>
+      <Typography variant="body2" color="textSecondary">
+        목록에서 사용자를 선택하여 시작하세요
+      </Typography>
+    </Box>
+      }
     </Card>
   );
 }
