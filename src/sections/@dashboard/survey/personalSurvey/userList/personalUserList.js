@@ -38,11 +38,12 @@ export default function PersonalUserList({ USERLIST, selectedUser, setSelectedUs
       setSelectedUser(id); // 새로운 항목을 클릭하면 해당 항목 선택
     }
   };
+
   return (
     <Card sx={{ mb: 3 }}>
       <Scrollbar>
         <TableContainer sx={{ maxHeight: 200 }}>
-          <Table>
+          <Table stickyHeader>
             <PersonalUserListHead
               order={order}
               orderBy={orderBy}

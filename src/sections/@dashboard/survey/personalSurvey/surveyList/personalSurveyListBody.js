@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { filter } from 'lodash';
-
-// components
 import {
   TableBody,
   TableRow,
@@ -53,7 +51,7 @@ export default function PersonalSurveyListBody({ surveys, categorys, order, orde
         const { id, question, level, categoryId } = row;
         const selectedSurvey = selected.indexOf(id) !== -1;
         const category = categorys.find(data => data.id === categoryId);
-        
+
         return (
           <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedSurvey}>
             <TableCell padding="checkbox">

@@ -37,7 +37,7 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user) => _user.userName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -47,13 +47,13 @@ export default function PersonalUserListBody({ users, order, orderBy, filterName
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0;
   const isNotFound = !filteredUsers.length && !!filterName;
+
   return (
     <TableBody>
       {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
         const { id, userName, userLevel, userBirth, categoryList } = row;
         const selectedUser = selected === id;
         const category = categoryList.map(item => item.name).join(',');
-
 
         return (
           <TableRow hover key={id} tabIndex={-1} role="checkbox" selected={selectedUser}>

@@ -50,7 +50,7 @@ export default function AddSurveySelectForm({inputs, setInputs}) {
                 return;
             }
             const response = await getDefaultRequestApi(API.getCategoryList, errMsg, navigate, accessTkn, refreshTkn);
-            console.log(response.data);
+            
             if (response.status === 200 && response.data.categoryList !== undefined) {
                 setCategorySelect(response.data.categoryList);
                 if (!response.data.categoryList.some(category => category.id === inputs.categoryId)) {
