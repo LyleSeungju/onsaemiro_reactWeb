@@ -1,5 +1,6 @@
 // const baseURL = `https://test.onsaemiro.site/api`; // 기본 api 주소
-const baseURL = `https://test.onsaemiro.site/api`;
+const baseURL = `https://onsaemiro.site/api`;
+
 export const API = {
     // 회원 관련 API
     "manageRegister": `${baseURL}/member/register/manager`, // 관리자 회원가입
