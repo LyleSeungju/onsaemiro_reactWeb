@@ -123,6 +123,7 @@ export default function SurveyForm({status, mode, closeModal, reload}) {
         }
     };
 
+    
     useEffect(() => {
         const getCategoryList = async () => {
             const errMsg = 'Error : getCategoryList';

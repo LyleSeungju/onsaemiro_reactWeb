@@ -21,6 +21,7 @@ import ModalSeqSurvey from '../sections/@dashboard/survey/seqSurvey/seqSurvey';
 import PreviewSurveyModal from '../sections/@dashboard/survey/previewSurvey/previewSurveyModal';
 import ModalModifySurvey from '../sections/@dashboard/survey/modifySurvey';
 import ModalSetCategory from '../sections/@dashboard/survey/setCategory/setCategory';
+import ModalSetPersonalSurvey from '../sections/@dashboard/survey/personalSurvey/ModalSetPersonalSurvey';
 // api request
 import { API } from '../apiLink';
 import { getDefaultRequestApi } from '../apiRequest';
@@ -122,11 +123,12 @@ export default function UserPage() {
               {modalState.val === 'preview' && <PreviewSurveyModal status={modalState.status} data={surveyData} /> }
               {modalState.val === 'modify' && <ModalModifySurvey status={modalState.status} data={surveyData} close={closeModal} reload={fetchSurveyData}/> }
               {modalState.val === 'category' && <ModalSetCategory /> }
+              {modalState.val === 'personal' && <ModalSetPersonalSurvey />}
             </Box>
           </Modal>
 
           <SurveyToolbar  filterName={filterName} onFilterName={handleFilterByName} /> {/* numSelected={selected.length} */}
-          <SurveyHead addClick={()=>openModal('add')} seqClick={()=>openModal('seq')} categoryClick={()=>openModal('category')} />
+          <SurveyHead addClick={()=>openModal('add')} seqClick={()=>openModal('seq')} categoryClick={()=>openModal('category')} personalClick={()=>openModal('personal')}/>
           
           <SurveyList prevClick={()=>openModal('preview')} modifyClick={()=>openModal('modify')} setData={setDatas} categoryList={categoryList} surveyList={surveyList} />
 

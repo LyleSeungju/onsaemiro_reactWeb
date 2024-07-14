@@ -36,10 +36,16 @@ export const API = {
     "deleteSurvey": `${baseURL}/survey/management/delete`, // 설문 삭제
     "changeSurveyOrder": `${baseURL}/survey/management/num/change`, // 질문 순서 변경
     "getSurveyData": `${baseURL}/survey/get/id`, // 설문 데이터 조회
+    "setPersonalSurvey": `${baseURL}/survey/management/update/userSurveyList`, // 유저 별 질문 리스트 구성
+    "getUserSurveyList": `${baseURL}/survey/get`, // 사용자 Id로 질문 불러오기 
 
     // 유저 요구사항 관련 API
     "getRequirementList": `${baseURL}/request/get/all/bymanager`, // 요구사항 리스트 조회
     "getNewRequirementList": `${baseURL}/request/get/new`, // 새로운 요구사항 리스트 조회
     "checkRequirement": `${baseURL}/request/check`, // 요구사항 확인
     "deleteRequirement": `${baseURL}/request/delete`, // 요구사항 삭제
+
+
+
+    
 };
